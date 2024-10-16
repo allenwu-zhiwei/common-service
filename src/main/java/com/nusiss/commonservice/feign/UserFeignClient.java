@@ -16,19 +16,19 @@ public interface UserFeignClient {
     @RequestMapping(value = "/getCurrentUserInfo", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<User>> getCurrentUserInfo(@RequestHeader("authToken") String authToken);
 
-    @PostMapping("/{key}")
-    public void save(@PathVariable String key, @RequestBody String value, @RequestParam long timeout);
+    @PostMapping("/api/redis/{key}/{value}/{timeout}")
+    public String save(@PathVariable("key") String var1, @PathVariable("value") String var2, @PathVariable("timeout") Integer var3);
 
     // Get value by key
-    @GetMapping("/{key}")
-    public String get(@PathVariable String key);
+    @GetMapping("/api/redis/{key}")
+    public String get(@PathVariable("key") String var1);
 
     // Delete a key
-    @DeleteMapping("/{key}")
-    public void delete(@PathVariable String key);
+    @DeleteMapping("/api/redis/{key}")
+    public String delete(@PathVariable("key") String var1);
 
     // Check if key exists
-    @GetMapping("/exists/{key}")
-    public boolean exists(@PathVariable String key);
+    @GetMapping("/api/redis/exists/{key}")
+    public String exists(@PathVariable("key") String var1);
 
 }
