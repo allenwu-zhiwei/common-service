@@ -16,4 +16,19 @@ public interface UserFeignClient {
     @RequestMapping(value = "/getCurrentUserInfo", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<User>> getCurrentUserInfo(@RequestHeader("authToken") String authToken);
 
+    @PostMapping("/{key}")
+    public void save(@PathVariable String key, @RequestBody String value, @RequestParam long timeout);
+
+    // Get value by key
+    @GetMapping("/{key}")
+    public String get(@PathVariable String key);
+
+    // Delete a key
+    @DeleteMapping("/{key}")
+    public void delete(@PathVariable String key);
+
+    // Check if key exists
+    @GetMapping("/exists/{key}")
+    public boolean exists(@PathVariable String key);
+
 }
